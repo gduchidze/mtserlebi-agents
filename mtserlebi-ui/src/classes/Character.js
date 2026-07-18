@@ -18,11 +18,20 @@ class Character {
     this.pauseChance = config.pauseChance || 0.2; 
     this.directionChangeChance = config.directionChangeChance || 0.3;
 
+    this.interactDistance = config.interactDistance || 55;
+
     this.sprite = this.scene.physics.add
       .sprite(this.spawnPoint.x, this.spawnPoint.y, this.atlas, this.defaultFrame)
-      .setSize(30, 40)
-      .setOffset(0, 0)
-      .setImmovable(true);
+      .setScale(config.scale || 1)
+      .setImmovable(true)
+      .setCollideWorldBounds(true);
+
+    // feet-only physics body: heads may visually overlap walls/trees (classic
+    // top-down look) while feet stay on walkable ground
+    const frameW = this.sprite.width;
+    const frameH = this.sprite.height;
+    this.sprite.setSize(frameW * 0.45, frameH * 0.22);
+    this.sprite.setOffset(frameW * 0.28, frameH * 0.76);
 
     this.scene.physics.add.collider(this.sprite, config.worldLayer);
     
@@ -74,7 +83,7 @@ class Character {
     );
   }
   
-  isPlayerNearby(player, distance = 55) {
+  isPlayerNearby(player, distance = this.interactDistance) {
     return this.distanceToPlayer(player) < distance;
   }
   
@@ -239,10 +248,12 @@ class Character {
       this.sprite.body.setVelocity(0);
     }
     
+    // y-sorted depth against the occluding object layer
+    this.sprite.setDepth(this.sprite.y + this.sprite.displayHeight / 2);
+
     // Update name label position
     if (this.nameLabel) {
-      this.nameLabel.x = this.sprite.x;
-      this.nameLabel.y = this.sprite.y - 40;
+      this.updateNameLabelPosition();
     }
   }
 
@@ -259,14 +270,14 @@ class Character {
 
   createNameLabel() {
     this.nameLabel = this.scene.add.text(0, 0, this.name, {
-      font: "14px Arial",
-      fill: "#ffffff",
-      backgroundColor: "#000000",
-      padding: { x: 4, y: 2 },
+      font: "18px Georgia",
+      fill: "#F5E6C8",
+      backgroundColor: "#3A1418",
+      padding: { x: 8, y: 3 },
       align: "center"
     });
     this.nameLabel.setOrigin(0.5, 1);
-    this.nameLabel.setDepth(20);
+    this.nameLabel.setDepth(3500); // above the y-sorted world (max ~2048)
     this.updateNameLabelPosition();
   }
 
@@ -274,7 +285,7 @@ class Character {
     if (this.nameLabel && this.sprite) {
       this.nameLabel.setPosition(
         this.sprite.x,
-        this.sprite.y - this.sprite.height/2 - 10
+        this.sprite.y - this.sprite.displayHeight / 2 - 8
       );
     }
   }

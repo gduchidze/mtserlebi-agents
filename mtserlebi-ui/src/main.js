@@ -7,6 +7,8 @@ const config = {
     type: Phaser.AUTO,
     width: 1024,
     height: 768,
+    pixelArt: true,
+    roundPixels: true,
     parent: 'game-container',
     scale: {
         mode: Phaser.Scale.FIT,
@@ -26,4 +28,6 @@ const config = {
     },
 };
 
-export default new Phaser.Game(config);
+const game = new Phaser.Game(config);
+window.game = game;
+export default game;

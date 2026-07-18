@@ -13,3 +13,9 @@ node_modules/
 # Build
 dist/
 /npm-debug.log
+
+# Generated previews & test screenshots
+scripts/preview/
+scripts/ui_shots/
+__pycache__/
+*.pyc

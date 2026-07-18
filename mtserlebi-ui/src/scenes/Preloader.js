@@ -11,32 +11,31 @@ export class Preloader extends Scene
     {
         this.load.setPath('assets');
 
-        // General assets
-        this.load.image('background', 'talking_philosophers.jpg');
-        this.load.image('logo', 'logo.png');
+        // World & menu background: one hand-painted Georgian town image
+        this.load.image('town', 'sakartvelo_town.png');
+        // Collision rectangles generated from the image by scripts/build_collision.py
+        this.load.json('collision', 'collision.json');
 
-        // Tilesets
-        this.load.image("tuxmon-tiles", "tilesets/tuxmon-sample-32px-extruded.png");
-        this.load.image("greece-tiles", "tilesets/ancient_greece_tileset.png");
-        this.load.image("plant-tiles", "tilesets/plant.png");
+        // Occluding objects layer (trees, houses...) from scripts/build_objects.py
+        this.load.image('objects', 'objects.png');
+        this.load.json('objects-data', 'objects.json');
 
-        // Tilemap
-        this.load.tilemapTiledJSON("map", "tilemaps/philoagents-town.json");
+        // Dialogue portraits derived from the atlases by scripts/build_portraits.py
+        ["rustaveli", "ilia", "akaki", "vazha", "mikheil", "konstantine", "iakob"].forEach(id => {
+            this.load.image(`portrait-${id}`, `portraits/${id}.png`);
+        });
 
         // Character assets
-        this.load.atlas("sophia", "characters/sophia/atlas.png", "characters/sophia/atlas.json");
-        this.load.atlas("socrates", "characters/socrates/atlas.png", "characters/socrates/atlas.json"); 
-        this.load.atlas("plato", "characters/plato/atlas.png", "characters/plato/atlas.json"); 
-        this.load.atlas("aristotle", "characters/aristotle/atlas.png", "characters/aristotle/atlas.json"); 
-        this.load.atlas("descartes", "characters/descartes/atlas.png", "characters/descartes/atlas.json"); 
-        this.load.atlas("leibniz", "characters/leibniz/atlas.png", "characters/leibniz/atlas.json"); 
-        this.load.atlas("ada_lovelace", "characters/ada/atlas.png", "characters/ada/atlas.json"); 
-        this.load.atlas("turing", "characters/turing/atlas.png", "characters/turing/atlas.json"); 
-        this.load.atlas("searle", "characters/searle/atlas.png", "characters/searle/atlas.json"); 
-        this.load.atlas("chomsky", "characters/chomsky/atlas.png", "characters/chomsky/atlas.json"); 
-        this.load.atlas("dennett", "characters/dennett/atlas.png", "characters/dennett/atlas.json"); 
-        this.load.atlas("miguel", "characters/miguel/atlas.png", "characters/miguel/atlas.json"); 
-        this.load.atlas("paul", "characters/paul/atlas.png", "characters/paul/atlas.json"); 
+        this.load.atlas("duchidze", "characters/duchidze/atlas.png", "characters/duchidze/atlas.json");
+
+        // Georgian writers
+        this.load.atlas("rustaveli", "characters/rustaveli/atlas.png", "characters/rustaveli/atlas.json");
+        this.load.atlas("ilia", "characters/ilia/atlas.png", "characters/ilia/atlas.json");
+        this.load.atlas("akaki", "characters/akaki/atlas.png", "characters/akaki/atlas.json");
+        this.load.atlas("vazha", "characters/vazha/atlas.png", "characters/vazha/atlas.json");
+        this.load.atlas("mikheil", "characters/mikheil/atlas.png", "characters/mikheil/atlas.json");
+        this.load.atlas("konstantine", "characters/konstantine/atlas.png", "characters/konstantine/atlas.json");
+        this.load.atlas("iakob", "characters/iakob/atlas.png", "characters/iakob/atlas.json");
     }
 
     create ()

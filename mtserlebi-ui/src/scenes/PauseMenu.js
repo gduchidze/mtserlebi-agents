@@ -15,30 +15,30 @@ export class PauseMenu extends Scene {
         const centerY = this.cameras.main.height / 2;
         
         const panel = this.add.graphics();
-        panel.fillStyle(0xffffff, 1);
+        panel.fillStyle(0xF5E6C8, 1);
         panel.fillRoundedRect(centerX - 200, centerY - 150, 400, 300, 20);
-        panel.lineStyle(4, 0x000000, 1);
+        panel.lineStyle(4, 0x722F37, 1);
         panel.strokeRoundedRect(centerX - 200, centerY - 150, 400, 300, 20);
 
-        this.add.text(centerX, centerY - 120, 'GAME PAUSED', {
+        this.add.text(centerX, centerY - 120, 'პაუზა', {
             fontSize: '28px',
-            fontFamily: 'Arial',
-            color: '#000000',
+            fontFamily: 'Georgia, "Noto Serif Georgian", serif',
+            color: '#2B1A12',
             fontStyle: 'bold'
         }).setOrigin(0.5);
 
         const buttonY = centerY - 50;
         const buttonSpacing = 70;
 
-        this.createButton(centerX, buttonY, 'Resume Game', () => {
+        this.createButton(centerX, buttonY, 'გაგრძელება', () => {
             this.resumeGame();
         });
 
-        this.createButton(centerX, buttonY + buttonSpacing, 'Main Menu', () => {
+        this.createButton(centerX, buttonY + buttonSpacing, 'მთავარი მენიუ', () => {
             this.returnToMainMenu();
         });
 
-        this.createButton(centerX, buttonY + buttonSpacing * 2, 'Reset Game', () => {
+        this.createButton(centerX, buttonY + buttonSpacing * 2, 'თავიდან დაწყება', () => {
             this.resetGame();
         });
 
@@ -57,8 +57,8 @@ export class PauseMenu extends Scene {
         shadow.fillRoundedRect(x - buttonWidth / 2 + 5, y - buttonHeight / 2 + 5, buttonWidth, buttonHeight, cornerRadius);
 
         const button = this.add.graphics();
-        button.fillStyle(0x4a90e2, 1); 
-        button.lineStyle(2, 0x3a70b2, 1); 
+        button.fillStyle(0x722F37, 1); 
+        button.lineStyle(2, 0x3A1418, 1); 
         button.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
         button.strokeRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
         button.setInteractive(
@@ -68,15 +68,15 @@ export class PauseMenu extends Scene {
 
         const buttonText = this.add.text(x, y, text, {
             fontSize: '22px',
-            fontFamily: 'Arial',
-            color: '#FFFFFF', 
+            fontFamily: 'Georgia, "Noto Serif Georgian", serif',
+            color: '#F5E6C8', 
             fontStyle: 'bold'
         }).setOrigin(0.5);
 
         button.on('pointerover', () => {
             button.clear();
-            button.fillStyle(0x5da0f2, 1); 
-            button.lineStyle(2, 0x3a70b2, 1);
+            button.fillStyle(0x8E3B45, 1); 
+            button.lineStyle(2, 0x3A1418, 1);
             button.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
             button.strokeRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
             buttonText.y -= 2;
@@ -84,8 +84,8 @@ export class PauseMenu extends Scene {
 
         button.on('pointerout', () => {
             button.clear();
-            button.fillStyle(0x4a90e2, 1);
-            button.lineStyle(2, 0x3a70b2, 1);
+            button.fillStyle(0x722F37, 1);
+            button.lineStyle(2, 0x3A1418, 1);
             button.fillRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
             button.strokeRoundedRect(x - buttonWidth / 2, y - buttonHeight / 2, buttonWidth, buttonHeight, cornerRadius);
             buttonText.y += 2;
@@ -119,9 +119,9 @@ export class PauseMenu extends Scene {
             const centerX = this.cameras.main.width / 2;
             const centerY = this.cameras.main.height / 2 + 120;
             
-            const errorText = this.add.text(centerX, centerY, 'Failed to reset game. Try again.', {
+            const errorText = this.add.text(centerX, centerY, 'ვერ განულდა. სცადეთ თავიდან.', {
                 fontSize: '16px',
-                fontFamily: 'Arial',
+                fontFamily: 'Georgia, "Noto Serif Georgian", serif',
                 color: '#FF0000'
             }).setOrigin(0.5);
             

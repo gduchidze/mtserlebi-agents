@@ -39,10 +39,13 @@ class DialogueManager {
       if (!this.isTyping) {
         if (this.isStreaming && (event.key === 'Space' || event.key === ' ')) {
           this.skipStreaming();
+        } else if (event.key === 'Escape' && this.dialogueBox && this.dialogueBox.isVisible()) {
+          // let ESC close the dialogue after a reply too, not only while typing
+          this.closeDialogue();
         }
         return;
       }
-    
+
       this.handleKeyPress(event);
     });
   }
@@ -199,8 +202,11 @@ class DialogueManager {
   
   startDialogue(philosopher) {
     this.cancelDisconnectTimeout();
-    
+
     this.activePhilosopher = philosopher;
+    if (this.dialogueBox.setSpeaker) {
+      this.dialogueBox.setSpeaker(philosopher.id, philosopher.name);
+    }
     this.isTyping = true;
     this.currentMessage = '';
     

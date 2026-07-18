@@ -47,7 +47,7 @@ The local development server runs on http://localhost:8080 by default.
 
 Explore a charming pixel-art town with various buildings and natural elements.
 
-![Philosopher Town](public/assets/philoagents_town.png)
+![Philosopher Town](public/assets/sakartvelo.png)
 
 To build the town, we have used the following assets:
 
